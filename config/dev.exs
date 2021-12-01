@@ -3,9 +3,10 @@ import Config
 # Configure your database
 config :major_tom, MajorTom.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "majortomdeveloper",
   database: "major_tom_dev",
   hostname: "localhost",
+  port: "57433",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
