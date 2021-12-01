@@ -54,6 +54,17 @@ if config_env() == :prod do
   config :sentry,
     dsn: sentry_dsn
 
+  # An IRC user account must be set up for the bot user, and the account must be password protected.
+  libera_irc_password =
+    System.get_env("MAJOR_TOM_LIBERA_IRC_PASSWORD") ||
+      raise """
+        environment variable MAJOR_TOM_LIBERA_IRC_PASSWORD is missing.
+        Using an account that does not have a password is not supported.
+      """
+
+  config :major_tom, MajorTom.IrcRobot,
+    password: libera_irc_password
+
   # ## Using releases
   #
   # If you are doing OTP releases, you need to instruct Phoenix

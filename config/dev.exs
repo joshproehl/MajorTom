@@ -64,6 +64,12 @@ config :major_tom, MajorTomWeb.Endpoint,
     ]
   ]
 
+config :major_tom, MajorTom.IrcRobot,
+  name: "MajorTom-DEV",
+  full_name: "MajorTom, a robotic SpaceX Fan, DEV MODE",
+  aka: "&",
+  password: ""
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 

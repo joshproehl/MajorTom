@@ -15,9 +15,10 @@ defmodule MajorTom.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: MajorTom.PubSub},
       # Start the Endpoint (http/https)
-      MajorTomWeb.Endpoint
+      MajorTomWeb.Endpoint,
       # Start a worker by calling: MajorTom.Worker.start_link(arg)
       # {MajorTom.Worker, arg}
+      {MajorTom.IrcRobot, []},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -8,7 +8,8 @@
 import Config
 
 config :major_tom,
-  ecto_repos: [MajorTom.Repo]
+  ecto_repos: [MajorTom.Repo],
+  flherne_sync_http_adapter: MajorTom.HTTPAdapter
 
 # Configures the endpoint
 config :major_tom, MajorTomWeb.Endpoint,
@@ -49,6 +50,23 @@ config :sentry,
   },
   release: "marvin@#{Mix.Project.config[:version]}",
   included_environments: [:prod]
+
+config :major_tom, MajorTom.IrcRobot,
+  adapter: Hedwig.Adapters.IRC,
+  server: "irc.esper.net",
+  port: 6697,
+  ssl?: true,
+  name: "MajorTom",
+  full_name: "MajorTom, a robotic SpaceX Fan",
+  aka: "^",
+  rooms: [
+    {"#MajorTomDev", ""},
+  ],
+  responders: [
+    {Hedwig.Responders.Help, []},
+    {Hedwig.Responders.Ping, []},
+    {MajorTom.Responders.Flherne, []},
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,
