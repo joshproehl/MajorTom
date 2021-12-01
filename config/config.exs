@@ -39,6 +39,17 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
+config :sentry,
+  dsn: "${MAJOR_TOM_SENTRY_DSN}",
+  environment_name: Mix.env(),
+  enable_source_code_context: true,
+  root_source_code_path: File.cwd!(),
+  tags: %{
+    env: "production"
+  },
+  release: "marvin@#{Mix.Project.config[:version]}",
+  included_environments: [:prod]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

@@ -43,6 +43,17 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  # Sentry DSN is provided by sentry.io dashboard for the project.
+  sentry_dsn =
+    System.get_env("MAJOR_TOM_SENTRY_DSN") ||
+      raise """
+        environment variable MAJOR_TOM_SENTRY_DSN is missing.
+        This should be the full DSN for the project provided by Sentry
+      """
+
+  config :sentry,
+    dsn: sentry_dsn
+
   # ## Using releases
   #
   # If you are doing OTP releases, you need to instruct Phoenix

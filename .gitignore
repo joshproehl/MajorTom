@@ -32,3 +32,4 @@ major_tom-*.tar
 npm-debug.log
 /assets/node_modules/
 
+deploy/.ansible_vault_pass
