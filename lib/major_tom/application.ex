@@ -19,6 +19,7 @@ defmodule MajorTom.Application do
       # Start a worker by calling: MajorTom.Worker.start_link(arg)
       # {MajorTom.Worker, arg}
       {MajorTom.IrcRobot, []},
+      {MajorTom.FlherneSync, []},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

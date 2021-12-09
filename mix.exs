@@ -52,6 +52,7 @@ defmodule MajorTom.MixProject do
       {:sentry, "~> 8.0"},
       {:hackney, "~> 1.8"},
       {:hedwig_irc_adapter, "~> 0.1.0"},
+      {:httpoison, "~> 1.6"},
     ]
   end
 
