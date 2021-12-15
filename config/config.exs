@@ -66,6 +66,7 @@ config :major_tom, MajorTom.IrcRobot,
     {Hedwig.Responders.Help, []},
     {Hedwig.Responders.Ping, []},
     {MajorTom.Responders.Flherne.Stupid, []},
+    {MajorTom.Responders.Flherne.Frog, []},
   ]
 
 # Configures Elixir's Logger
