@@ -50,12 +50,12 @@ defmodule MajorTom.Responders.Flherne.Frog do
   """
   respond ~r/nextfrog add (.+)/i, %Message{matches: %{1 => new_msg}} = msg do
     with cs <- Frog.changeset(%Frog{}, %{msg: new_msg, submitted_by: msg.user.name}),
-         {:ok, stupid} <- Repo.insert(cs) do
+         {:ok, _frog} <- Repo.insert(cs) do
       reply(msg, Enum.random(@added_responses))
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         Keyword.get_values(changeset.errors, :msg)
-        |> Enum.any?(fn {desc, opts} -> opts[:constraint] == :unique end)
+        |> Enum.any?(fn {_desc, opts} -> opts[:constraint] == :unique end)
         |> case do
           false ->
             reply(msg, "Could not save that for an unknown reason.")
@@ -85,7 +85,7 @@ defmodule MajorTom.Responders.Flherne.Frog do
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         Keyword.get_values(changeset.errors, :msg)
-        |> Enum.any?(fn {desc, opts} -> opts[:constraint] == :unique end)
+        |> Enum.any?(fn {_desc, opts} -> opts[:constraint] == :unique end)
         |> case do
           false ->
             Logger.error("Could not insert new Frog for unknown reason. Msg was: #{inspect(msg)}")

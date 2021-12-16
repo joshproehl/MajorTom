@@ -34,7 +34,6 @@ defmodule MajorTom.IrcRobot do
   #####
   # allowedoverrides from Hedwig.Robot
   #####
-  @impl true
   def handle_connect(%{name: name} = state) do
     if :undefined == :global.whereis_name(name) do
       :yes = :global.register_name(name, self())
@@ -43,18 +42,15 @@ defmodule MajorTom.IrcRobot do
     {:ok, state}
   end
 
-  @impl true
   def handle_disconnect(_reason, state) do
     {:reconnect, 5000, state}
   end
 
-  @impl true
   def handle_in(%Hedwig.Message{} = msg, state) do
     {:dispatch, msg, state}
   end
 
-  @impl true
-  def handle_in(msg, state) do
+  def handle_in(_msg, state) do
     {:noreply, state}
   end
 

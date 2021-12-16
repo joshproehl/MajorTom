@@ -58,7 +58,7 @@ defmodule MajorTom.Responders.Flherne.Stupid do
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         Keyword.get_values(changeset.errors, :msg)
-        |> Enum.any?(fn {desc, opts} -> opts[:constraint] == :unique end)
+        |> Enum.any?(fn {_desc, opts} -> opts[:constraint] == :unique end)
         |> case do
           false ->
             Logger.error("Could not insert new Stupid quote for unknown reason. Msg was: #{inspect(msg)}")
@@ -90,7 +90,7 @@ defmodule MajorTom.Responders.Flherne.Stupid do
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         Keyword.get_values(changeset.errors, :msg)
-        |> Enum.any?(fn {desc, opts} -> opts[:constraint] == :unique end)
+        |> Enum.any?(fn {_desc, opts} -> opts[:constraint] == :unique end)
         |> case do
           false ->
             Logger.error("Could not insert new Stupid quote for unknown reason. Msg was: #{inspect(msg)}")
