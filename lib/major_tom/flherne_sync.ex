@@ -5,7 +5,7 @@ defmodule MajorTom.FlherneSync do
 
   use GenServer
   require Logger
-  alias MajorTom.Flherne.{Frog,Lunch,Mission,Outcome,Stupid}
+  alias MajorTom.Flherne.{Colloid,Frog,Lunch,Mission,Outcome,Stupid}
   alias MajorTom.Repo
 
   @update_interval 86_400_000 # 1000 * 60 * 60 * 24, sync once an hour day, just in case we missed anything
@@ -26,6 +26,7 @@ defmodule MajorTom.FlherneSync do
     Process.send_after(self(), {:sync, :lunches}, 6_000)
     Process.send_after(self(), {:sync, :outcomes}, 8_000)
     Process.send_after(self(), {:sync, :missions}, 10_000)
+    Process.send_after(self(), {:sync, :colloids}, 12_000)
     {:ok, %{latest: []}}
   end
 
@@ -67,6 +68,10 @@ defmodule MajorTom.FlherneSync do
   end
 
 
+  def process_response(type, res) when type == :colloids do
+    String.split(res, ~r{\r\n|\r|\n})
+    |> Enum.map(fn line -> insert_or_ignore_colloid(line) end)
+  end
   def process_response(type, res) when type == :stupid do
     String.split(res, ~r{\r\n|\r|\n})
     |> Enum.map(fn line -> insert_or_ignore_stupid(line) end)
@@ -137,6 +142,16 @@ defmodule MajorTom.FlherneSync do
     |> Repo.insert()
     |> case do
          {:ok, _mission} -> :ok
+         {:error, _} -> :error
+       end
+  end
+
+  def insert_or_ignore_colloid(colloid) do
+    %Colloid{}
+    |> Colloid.changeset(%{msg: colloid})
+    |> Repo.insert()
+    |> case do
+         {:ok, _colloid} -> :ok
          {:error, _} -> :error
        end
   end
