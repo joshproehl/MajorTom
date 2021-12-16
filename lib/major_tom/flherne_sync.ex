@@ -46,7 +46,7 @@ defmodule MajorTom.FlherneSync do
 
   @spec fetch_txt_file(String.t()) :: String.t()
   def fetch_txt_file(type) do
-    with {:ok, %HTTPoison.Response{status_code: 200, body: result_body}} <- http_adapter().get("http://www.flherne.uk/hacks/#{type}.txt", @req_headers, @req_options)
+    with {:ok, %HTTPoison.Response{status_code: 200, body: result_body}} <- http_adapter().get("https://www.flherne.uk/hacks/#{type}.txt", @req_headers, @req_options)
     do
       Logger.debug("Got result body for #{type}.txt successfully.")
       {:ok, result_body}
