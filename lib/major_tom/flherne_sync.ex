@@ -5,7 +5,7 @@ defmodule MajorTom.FlherneSync do
 
   use GenServer
   require Logger
-  alias MajorTom.Flherne.{Book,Colloid,Frog,Lunch,Mission,Outcome,Stupid}
+  alias MajorTom.Flherne.{Banned,Book,Colloid,Frog,Lunch,Mission,Outcome,Stupid}
   alias MajorTom.Repo
 
   @update_interval 86_400_000 # 1000 * 60 * 60 * 24, sync once an hour day, just in case we missed anything
@@ -28,6 +28,7 @@ defmodule MajorTom.FlherneSync do
     Process.send_after(self(), {:sync, :missions}, 10_000)
     Process.send_after(self(), {:sync, :colloids}, 12_000)
     Process.send_after(self(), {:sync, :books}, 14_000)
+    Process.send_after(self(), {:sync, :banned}, 16_000)
     {:ok, %{latest: []}}
   end
 
@@ -69,6 +70,10 @@ defmodule MajorTom.FlherneSync do
   end
 
 
+  def process_response(type, res) when type == :banned do
+    String.split(res, ~r{\r\n|\r|\n})
+    |> Enum.map(fn line -> insert_or_ignore_banned(line) end)
+  end
   def process_response(type, res) when type == :books do
     String.split(res, ~r{\r\n|\r|\n})
     |> Enum.map(fn line -> insert_or_ignore_book(line) end)
@@ -167,6 +172,16 @@ defmodule MajorTom.FlherneSync do
     |> Repo.insert()
     |> case do
          {:ok, _book} -> :ok
+         {:error, _} -> :error
+       end
+  end
+
+  def insert_or_ignore_banned(banned) do
+    %Banned{}
+    |> Banned.changeset(%{msg: banned})
+    |> Repo.insert()
+    |> case do
+         {:ok, _banned} -> :ok
          {:error, _} -> :error
        end
   end
