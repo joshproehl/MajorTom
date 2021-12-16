@@ -5,7 +5,7 @@ defmodule MajorTom.FlherneSync do
 
   use GenServer
   require Logger
-  alias MajorTom.Flherne.{Frog,Stupid}
+  alias MajorTom.Flherne.{Frog,Stupid,Lunch}
   alias MajorTom.Repo
 
   @update_interval 86_400_000 # 1000 * 60 * 60 * 24, sync once an hour day, just in case we missed anything
@@ -23,6 +23,7 @@ defmodule MajorTom.FlherneSync do
     # After initializing the GenServer do an initial fetch of the various data files
     Process.send_after(self(), {:sync, :stupid}, 2_000)
     Process.send_after(self(), {:sync, :frogs}, 4_000)
+    Process.send_after(self(), {:sync, :lunches}, 6_000)
     {:ok, %{latest: []}}
   end
 
@@ -72,6 +73,10 @@ defmodule MajorTom.FlherneSync do
     String.split(res, ~r{\r\n|\r|\n})
     |> Enum.map(fn line -> insert_or_ignore_frog(line) end)
   end
+  def process_response(type, res) when type == :lunches do
+    String.split(res, ~r{\r\n|\r|\n})
+    |> Enum.map(fn line -> insert_or_ignore_lunch(line) end)
+  end
   def process_response(type, _res) do
     Logger.error("Tried to process a response for a type (#{type}) that didn't exist!")
   end
@@ -86,9 +91,9 @@ defmodule MajorTom.FlherneSync do
     end
   end
 
-  def insert_or_ignore_frog(stupid_msg) do
+  def insert_or_ignore_frog(frog) do
     %Frog{}
-    |> MajorTom.Flherne.Frog.changeset(%{msg: stupid_msg})
+    |> MajorTom.Flherne.Frog.changeset(%{msg: frog})
     |> Repo.insert()
     |> case do
       {:ok, _frog} -> :ok
@@ -96,5 +101,14 @@ defmodule MajorTom.FlherneSync do
     end
   end
 
+  def insert_or_ignore_lunch(lunch) do
+    %Lunch{}
+    |> Lunch.changeset(%{msg: lunch})
+    |> Repo.insert()
+    |> case do
+         {:ok, _lunch} -> :ok
+         {:error, _} -> :error
+       end
+  end
 end
 
