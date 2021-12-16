@@ -83,7 +83,6 @@ defmodule MajorTom.Responders.Flherne.Stupid do
   end
 
   hear ~r/^!stupid add (.+)/i, %Message{matches: %{1 => new_msg}} = msg do
-    Logger.debug("Responder firing for \"!stupid add\"")
     with cs <- Stupid.changeset(%Stupid{}, %{msg: new_msg, submitted_by: msg.user.name}),
          {:ok, _added} <- Repo.insert(cs) do
       maybe_reply(msg, Enum.random(@added_responses))
