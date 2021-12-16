@@ -68,6 +68,7 @@ config :major_tom, MajorTom.IrcRobot,
     {MajorTom.Responders.Flherne.Stupid, []},
     {MajorTom.Responders.Flherne.Frog, []},
     {MajorTom.Responders.Flherne.Lunch, []},
+    {MajorTom.Responders.Flherne.Outcome, []},
   ]
 
 # Configures Elixir's Logger

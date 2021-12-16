@@ -5,7 +5,7 @@ defmodule MajorTom.FlherneSync do
 
   use GenServer
   require Logger
-  alias MajorTom.Flherne.{Frog,Stupid,Lunch}
+  alias MajorTom.Flherne.{Frog,Lunch,Outcome,Stupid}
   alias MajorTom.Repo
 
   @update_interval 86_400_000 # 1000 * 60 * 60 * 24, sync once an hour day, just in case we missed anything
@@ -24,6 +24,7 @@ defmodule MajorTom.FlherneSync do
     Process.send_after(self(), {:sync, :stupid}, 2_000)
     Process.send_after(self(), {:sync, :frogs}, 4_000)
     Process.send_after(self(), {:sync, :lunches}, 6_000)
+    Process.send_after(self(), {:sync, :outcomes}, 8_000)
     {:ok, %{latest: []}}
   end
 
@@ -77,6 +78,10 @@ defmodule MajorTom.FlherneSync do
     String.split(res, ~r{\r\n|\r|\n})
     |> Enum.map(fn line -> insert_or_ignore_lunch(line) end)
   end
+  def process_response(type, res) when type == :outcomes do
+    String.split(res, ~r{\r\n|\r|\n})
+    |> Enum.map(fn line -> insert_or_ignore_outcome(line) end)
+  end
   def process_response(type, _res) do
     Logger.error("Tried to process a response for a type (#{type}) that didn't exist!")
   end
@@ -107,6 +112,16 @@ defmodule MajorTom.FlherneSync do
     |> Repo.insert()
     |> case do
          {:ok, _lunch} -> :ok
+         {:error, _} -> :error
+       end
+  end
+
+  def insert_or_ignore_outcome(outcome) do
+    %Outcome{}
+    |> Outcome.changeset(%{msg: outcome})
+    |> Repo.insert()
+    |> case do
+         {:ok, _outcome} -> :ok
          {:error, _} -> :error
        end
   end
