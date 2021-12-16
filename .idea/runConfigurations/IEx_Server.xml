@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="IEx Server" type="org.elixir_lang.iex.mix.configuration.Type" factoryName="IEx Mix">
+    <module name="MajorTom" />
+    <mix>
+      <argument>phx.server</argument>
+    </mix>
+    <module name="MajorTom" />
+    <module-filters inherit-application-module-filters="true" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

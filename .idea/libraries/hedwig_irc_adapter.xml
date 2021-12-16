@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="hedwig_irc_adapter" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig_irc_adapter/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig_irc_adapter/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig_irc_adapter/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig_irc_adapter/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig_irc_adapter/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig_irc_adapter/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/hedwig_irc_adapter/lib" />
+      <root url="file://$PROJECT_DIR$/deps/hedwig_irc_adapter/lib" />
+      <root url="file://$PROJECT_DIR$/deps/hedwig_irc_adapter/lib" />
+      <root url="file://$PROJECT_DIR$/deps/hedwig_irc_adapter/lib" />
+      <root url="file://$PROJECT_DIR$/deps/hedwig_irc_adapter/lib" />
+      <root url="file://$PROJECT_DIR$/deps/hedwig_irc_adapter/lib" />
+    </SOURCES>
+  </library>
+</component>

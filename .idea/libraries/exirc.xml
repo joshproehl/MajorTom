@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="exirc" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/exirc/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/exirc/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/exirc/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/exirc/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/exirc/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/exirc/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/exirc/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/exirc/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/exirc/lib" />
+      <root url="file://$PROJECT_DIR$/deps/exirc/lib" />
+      <root url="file://$PROJECT_DIR$/deps/exirc/lib" />
+      <root url="file://$PROJECT_DIR$/deps/exirc/lib" />
+      <root url="file://$PROJECT_DIR$/deps/exirc/lib" />
+    </SOURCES>
+  </library>
+</component>

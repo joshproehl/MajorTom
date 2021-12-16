@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="hedwig" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/hedwig/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/hedwig/lib" />
+      <root url="file://$PROJECT_DIR$/deps/hedwig/lib" />
+      <root url="file://$PROJECT_DIR$/deps/hedwig/lib" />
+      <root url="file://$PROJECT_DIR$/deps/hedwig/lib" />
+      <root url="file://$PROJECT_DIR$/deps/hedwig/lib" />
+      <root url="file://$PROJECT_DIR$/deps/hedwig/lib" />
+    </SOURCES>
+  </library>
+</component>
