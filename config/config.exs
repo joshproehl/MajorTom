@@ -65,6 +65,7 @@ config :major_tom, MajorTom.IrcRobot,
   responders: [
     {Hedwig.Responders.Help, []},
     {Hedwig.Responders.Ping, []},
+    {MajorTom.Responders.Flherne.Book, []},
     {MajorTom.Responders.Flherne.Colloid, []},
     {MajorTom.Responders.Flherne.Frog, []},
     {MajorTom.Responders.Flherne.Lunch, []},
