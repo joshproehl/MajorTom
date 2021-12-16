@@ -71,6 +71,7 @@ config :major_tom, MajorTom.IrcRobot,
     {MajorTom.Responders.Flherne.Frog, []},
     {MajorTom.Responders.Flherne.Lunch, []},
     {MajorTom.Responders.Flherne.Mission, []},
+    {MajorTom.Responders.Flherne.Misc, []},
     {MajorTom.Responders.Flherne.Outcome, []},
     {MajorTom.Responders.Flherne.Stupid, []},
   ]

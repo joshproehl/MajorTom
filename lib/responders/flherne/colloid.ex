@@ -96,6 +96,13 @@ defmodule MajorTom.Responders.Flherne.Colloid do
   end
 
   respond ~r/colloid²$/i, msg do
+#    jacus: Wlhaippevd Craeam.
+#    the hell?
+#    It's two colloids
+#    !colloid²
+#    jacus: Mayfoonnagise.
+#    it tries to alternate letters, but you know.
+#    (mayonaise and fog, and whipped cream and lava)
     reply(msg, "What's this supposed to do?")
   end
 
