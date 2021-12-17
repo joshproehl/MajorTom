@@ -12,12 +12,12 @@ defmodule MajorTom.Responders.Flherne.Frog do
   alias MajorTom.Flherne.Frog
 
   @added_responses [
-    "Ribbit. (Saved frog!)",
+    "Ribbit. (That's \"Saved\" in frog!)",
   ]
 
 
   @usage """
-  hedwig: frog -- Randomly chosen frog
+  nextfrog -- Randomly chosen frog
   """
   respond ~r/nextfrog$/i, msg do
     Repo.one(Ecto.Query.from q in Frog,
@@ -31,7 +31,7 @@ defmodule MajorTom.Responders.Flherne.Frog do
   end
 
   @usage """
-  hedwig: frog <search> -- See if we have a frog that matches
+  nextfrog <search> -- See if we have a frog that matches
   """
   respond ~r/nextfrog\s+(?!add\s)(.+)/i, %Message{matches: %{1 => search}} = msg do
     Repo.one(Ecto.Query.from q in Frog,
@@ -46,7 +46,7 @@ defmodule MajorTom.Responders.Flherne.Frog do
   end
 
   @usage """
-  hedwig: frog add <quote> -- Record a new frog 
+  nextfrog add <quote> -- Record a new frog
   """
   respond ~r/nextfrog add (.+)/i, %Message{matches: %{1 => new_msg}} = msg do
     with cs <- Frog.changeset(%Frog{}, %{msg: new_msg, submitted_by: msg.user.name}),

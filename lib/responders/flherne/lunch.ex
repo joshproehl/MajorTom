@@ -22,7 +22,7 @@ defmodule MajorTom.Responders.Flherne.Lunch do
   ]
 
   @usage """
-  hedwig: nextlunch -- Randomly selected lunch.
+  nextlunch -- Randomly selected lunch.
   """
   respond ~r/nextlunch$/i, msg do
     Repo.one(Ecto.Query.from q in Lunch,
@@ -38,7 +38,7 @@ defmodule MajorTom.Responders.Flherne.Lunch do
   end
 
   @usage """
-  hedwig: nextlunch <search> -- Search for a lunch
+  nextlunch <search> -- Search for a lunch
   """
   respond ~r/nextlunch\s+(?!add\s)(.+)/i, %Message{matches: %{1 => search}} = msg do
     Repo.one(Ecto.Query.from q in Lunch,
@@ -53,7 +53,7 @@ defmodule MajorTom.Responders.Flherne.Lunch do
   end
 
   @usage """
-  hedwig: nextlunch add <quote> -- Add a new type of lunch to the pot.
+  nextlunch add <quote> -- Add a new type of lunch to the pot.
   """
   respond ~r/nextlunch add (.+)/i, %Message{matches: %{1 => new_msg}} = msg do
     with cs <- Lunch.changeset(%Lunch{}, %{msg: new_msg, submitted_by: msg.user.name}),
@@ -125,5 +125,4 @@ defmodule MajorTom.Responders.Flherne.Lunch do
       {:ok, _res} -> :ok
     end
   end
-
 end

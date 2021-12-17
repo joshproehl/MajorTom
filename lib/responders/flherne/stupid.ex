@@ -20,7 +20,7 @@ defmodule MajorTom.Responders.Flherne.Stupid do
 
 
   @usage """
-  hedwig: stupid -- Randomly chosen dose of stupidity
+  stupid -- Randomly chosen dose of stupidity
   """
   respond ~r/stupid$/i, msg do
     Repo.one(Ecto.Query.from q in Stupid,
@@ -34,7 +34,7 @@ defmodule MajorTom.Responders.Flherne.Stupid do
   end
 
   @usage """
-  hedwig: stupid <search> -- Search the Book of Stupidity for your search term and returns a random matching item.
+  stupid <search> -- Search the Book of Stupidity for your search term and returns a random matching item.
   """
   respond ~r/stupid\s+(?!add\s)(.+)/i, %Message{matches: %{1 => search}} = msg do
     Repo.one(Ecto.Query.from q in Stupid,
@@ -49,7 +49,7 @@ defmodule MajorTom.Responders.Flherne.Stupid do
   end
 
   @usage """
-  hedwig: stupid add <quote> -- Add to the Book of Stupidity.
+  stupid add <quote> -- Add to the Book of Stupidity.
   """
   respond ~r/stupid add (.+)/i, %Message{matches: %{1 => new_msg}} = msg do
     with cs <- Stupid.changeset(%Stupid{}, %{msg: new_msg, submitted_by: msg.user.name}),
