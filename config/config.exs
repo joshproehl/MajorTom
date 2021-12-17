@@ -9,7 +9,8 @@ import Config
 
 config :major_tom,
   ecto_repos: [MajorTom.Repo],
-  flherne_sync_http_adapter: MajorTom.HTTPAdapter
+  flherne_sync_http_adapter: MajorTom.HTTPAdapter,
+  enable_flherne_sync: true
 
 # Configures the endpoint
 config :major_tom, MajorTomWeb.Endpoint,

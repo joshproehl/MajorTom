@@ -6,11 +6,19 @@ defmodule MajorTom.FlherneSync do
   use GenServer
   require Logger
   alias MajorTom.Flherne.{Banned,Book,Colloid,Frog,Lunch,Mission,Outcome,Stupid}
+  alias MajorTom.FlherneSync
   alias MajorTom.Repo
 
   @update_interval 86_400_000 # 1000 * 60 * 60 * 24, sync once an hour day, just in case we missed anything
   @req_headers []
   @req_options []
+
+  @doc """
+  Manually trigger a sync of all content from FLHerne's server
+  """
+  def sync_all() do
+    GenServer.cast(__MODULE__, {:sync, :all})
+  end
 
   def http_adapter, do: Application.get_env(:major_tom, :flherne_sync_http_adapter)
 
@@ -20,7 +28,13 @@ defmodule MajorTom.FlherneSync do
 
   def init(_) do
     Logger.debug("Initializing FLHerneSync genserver")
-    # After initializing the GenServer do an initial fetch of the various data files
+    # After initializing the GenServer do an initial fetch of the various data files,
+    # this is disabled by default in the dev mode config so we don't slam his server every restart.
+    if Application.get_env(:major_tom, :enable_flherne_sync), do: FlherneSync.sync_all()
+    {:ok, %{latest: []}}
+  end
+
+  def handle_cast({:sync, :all}, state) do
     Process.send_after(self(), {:sync, :stupid}, 2_000)
     Process.send_after(self(), {:sync, :frogs}, 4_000)
     Process.send_after(self(), {:sync, :lunches}, 6_000)
@@ -29,9 +43,8 @@ defmodule MajorTom.FlherneSync do
     Process.send_after(self(), {:sync, :colloids}, 12_000)
     Process.send_after(self(), {:sync, :books}, 14_000)
     Process.send_after(self(), {:sync, :banned}, 16_000)
-    {:ok, %{latest: []}}
+    {:noreply, state}
   end
-
 
   def handle_info({:sync, type}, state) do
     Logger.debug("syncing #{type}.txt from FLHerne's server")

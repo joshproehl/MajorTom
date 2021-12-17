@@ -1,5 +1,8 @@
 import Config
 
+config :major_tom,
+       enable_flherne_sync: false
+
 # Configure your database
 config :major_tom, MajorTom.Repo,
   username: "postgres",
