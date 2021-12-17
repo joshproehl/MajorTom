@@ -24,13 +24,6 @@ defmodule MajorTom.Responders.Flherne.Misc do
   end
 
   @usage """
-  nextbankruptcy -- unknown LunchBot command
-  """
-  respond ~r/nextbankruptcy$/i, msg do
-    reply(msg, "Not sure what you're asking, but I'm hoping for Boeing. Seems unlikely though.")
-  end
-
-  @usage """
   nextpinecone -- When will orbbfrgg next eat a pinecone?
   """
   respond ~r/nextpinecone$/i, msg do

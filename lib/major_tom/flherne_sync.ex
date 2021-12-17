@@ -5,7 +5,7 @@ defmodule MajorTom.FlherneSync do
 
   use GenServer
   require Logger
-  alias MajorTom.Flherne.{Banned,Book,Colloid,Frog,Lunch,Mission,Outcome,Stupid}
+  alias MajorTom.Flherne.{Bankrupt,Banned,Book,Colloid,Frog,Lunch,Mission,Outcome,Stupid}
   alias MajorTom.FlherneSync
   alias MajorTom.Repo
 
@@ -43,6 +43,7 @@ defmodule MajorTom.FlherneSync do
     Process.send_after(self(), {:sync, :colloids}, 12_000)
     Process.send_after(self(), {:sync, :books}, 14_000)
     Process.send_after(self(), {:sync, :banned}, 16_000)
+    Process.send_after(self(), {:sync, :bankrupt}, 18_000)
     {:noreply, state}
   end
 
@@ -83,6 +84,10 @@ defmodule MajorTom.FlherneSync do
   end
 
 
+  def process_response(type, res) when type == :bankrupt do
+    String.split(res, ~r{\r\n|\r|\n})
+    |> Enum.map(fn line -> insert_or_ignore_bankruptcy(line) end)
+  end
   def process_response(type, res) when type == :banned do
     String.split(res, ~r{\r\n|\r|\n})
     |> Enum.map(fn line -> insert_or_ignore_banned(line) end)
@@ -195,6 +200,16 @@ defmodule MajorTom.FlherneSync do
     |> Repo.insert()
     |> case do
          {:ok, _banned} -> :ok
+         {:error, _} -> :error
+       end
+  end
+
+  def insert_or_ignore_bankruptcy(bankruptcy) do
+    %Bankrupt{}
+    |> Bankrupt.changeset(%{msg: bankruptcy})
+    |> Repo.insert()
+    |> case do
+         {:ok, _bankrupt} -> :ok
          {:error, _} -> :error
        end
   end

@@ -16,6 +16,7 @@ Lunchbot's command list is:
 
 LunchBot stores its data as TXT files at https://www.flherne.uk/hacks/, with the filenames:
   * banned.txt
+  * bankrupt.txt
   * books.txt
   * colloids.txt
   * frogs.txt
