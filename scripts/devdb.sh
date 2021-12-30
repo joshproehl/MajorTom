@@ -34,11 +34,11 @@ case "$1" in
       fi
     fi
     ;;
-  dev-console)
+  console)
     docker exec -it $CONTAINER_NAME psql -U postgres $DEV_DATABASE_NAME
     ;;
   *)
-    printf "Usage: `basename $0` {start|stop|dev-console} \nStarts (or stops and deletes) a postegres docker container named $CONTAINER_NAME on port $CONTAINER_PORT, which the dev environment is expecting to find.\nAlso provides a convenient way to access a psql console.\n\n"
+    printf "Usage: `basename $0` {start|stop|console} \nStarts (or stops and deletes) a postegres docker container named $CONTAINER_NAME on port $CONTAINER_PORT, which the dev environment is expecting to find.\nAlso provides a convenient way to access a psql console.\n\n"
     exit 1
     ;;
 esac
