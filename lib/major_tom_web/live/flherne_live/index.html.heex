@@ -1,0 +1,24 @@
+<ul>
+    <li><%= live_patch "Stupid", to: Routes.flherne_index_path(@socket, :show, "stupid") %></li>
+    <li><%= live_patch "Frog", to: Routes.flherne_index_path(@socket, :show, "frog") %></li>
+</ul>
+
+<h1><%= @page_title %></h1>
+
+<div>
+    <form phx-change="search">
+        <%= text_input :search_field, :term, placeholder: "Search ...", "phx-debounce": "300" %>
+    </form>
+</div>
+
+<!-- TODO: phx-delete -->
+<ul id="flherne_item_list">
+  <%= for item <- @items do %>
+    <li id={item.id}>#<%= item.id %>: <%= item.msg %></li>
+  <% end %>
+</ul>
+
+<div>
+    <span><%= live_patch "Previous", to: Routes.flherne_index_path(@socket, :show, @type, s: @last_id,  count: @count), replace: true %></span>
+    <span><%= live_patch "Next", to: Routes.flherne_index_path(@socket, :show, @type, e: @first_id, count: @count), replace: true %></span>
+</div>

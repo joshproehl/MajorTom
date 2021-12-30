@@ -18,6 +18,8 @@ defmodule MajorTomWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    live "/flherne", FlherneLive.Index, :index
+    live "/flherne/:type", FlherneLive.Index, :show
   end
 
   # Other scopes may use custom stacks.
