@@ -3,6 +3,28 @@
 @tailwind components;
 @tailwind utilities;
 
+#navlist {
+  @apply grid gap-4 grid-flow-col auto-cols-max mb-8;
+}
+#navlist li a {
+  @apply underline-offset-4 underline hover:text-blue-600;
+}
+
+h1 {
+  @apply text-6xl font-bold;
+}
+
+input {
+  @apply my-4 p-2 border-2 border-solid border-neutral-600;
+}
+
+.prevnext {
+  @apply mt-6;
+}
+.prevnext a {
+  @apply mx-4 underline underline-offset-4 hover:text-blue-600;
+}
+
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;

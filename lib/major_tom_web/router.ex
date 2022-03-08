@@ -19,7 +19,7 @@ defmodule MajorTomWeb.Router do
 
     get "/", PageController, :index
     live "/flherne", FlherneLive.Index, :index
-    live "/flherne/:type", FlherneLive.Index, :show
+    live "/flherne/:type", FlherneLive.Show, :show
   end
 
   # Other scopes may use custom stacks.
